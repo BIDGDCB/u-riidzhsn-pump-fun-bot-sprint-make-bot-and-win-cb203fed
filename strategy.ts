@@ -5,8 +5,10 @@
 // the creator's own buy was, whether the creator has sold, how many other
 // wallets have bought in, whether sells are eating the buys, and how far the
 // price has run up from its create price. It buys only launches that pass
-// every filter, takes profit fast, cuts losers faster, never holds past a
-// short deadline, and leaves at once when the creator sells. With only five
+// every filter, takes profit by trailing winners instead of capping them at
+// a small fixed target (a pump coin can run several multiples; the trailing
+// stop is what banks it), cuts losers fast, never holds past a short
+// deadline, and leaves at once when the creator sells. With only five
 // open positions allowed, a flat coin is exited quickly so the slot can be
 // recycled into the next launch.
 //
@@ -71,23 +73,23 @@ export const DEFAULT_PARAMS: Params = {
   maxAge: 6,
   stakeLamports: 100_000_000n,
   minBuyLamports: 10_000_000n,
-  minRealSol: 1_000_000_000n,
+  minRealSol: 2_000_000_000n,
   maxRealSol: 30_000_000_000n,
-  maxDevBuy: 2_500_000_000n,
-  minTrades: 4,
-  minBuyers: 2,
-  maxSellRatioBps: 5000n,
-  minRunupBps: 10000n,
+  maxDevBuy: 1_000_000_000n,
+  minTrades: 8,
+  minBuyers: 4,
+  maxSellRatioBps: 3000n,
+  minRunupBps: 11500n,
   maxRunupBps: 25000n,
   flowWindow: 10,
-  minFlowLamports: 0n,
+  minFlowLamports: 50_000_000n,
   skipDevSold: true,
   slippageBps: 10000,
-  tpBps: 2500n,
-  slBps: 1200n,
-  trailArmBps: 2000n,
-  trailBps: 1000n,
-  maxHold: 30,
+  tpBps: 15000n,
+  slBps: 600n,
+  trailArmBps: 1500n,
+  trailBps: 800n,
+  maxHold: 60,
   exitOnDevSell: true,
   staleSlots: 60,
 };
